@@ -49,7 +49,7 @@ def lower_formosan_text(raw_text: str, language: str) -> str:
     return text
 
 
-def load_g2p_from_csv(g2p_path: Path) -> dict:
+def load_g2p_from_csv(g2p_path: Path = Path("metadata/g2p_250402.csv")) -> dict:
     g2p = dict()
     with g2p_path.open(newline="", encoding="utf-8-sig") as file:
         csv_reader = csv.DictReader(file)
@@ -146,7 +146,7 @@ def replace_to_list(text: str, g2p: dict) -> Tuple[list, set]:
 
 
 def convert_to_ipa(
-    text: str, g2p: dict, end_punctuations: list
+    text: str, g2p: dict, end_punctuations: list = ["!", "?", ".", ";", ","]
 ) -> Tuple[Optional[str], list]:
     result_list = []
     oovs_to_ipa = set()
@@ -174,4 +174,9 @@ def convert_to_ipa(
 
 
 if __name__ == "__main__":
-    pass
+    raw_text = "Ano siadada ko tamdaw i, o malepelay no kawas ko saloʼafang sanay."
+    lang_group = "阿美_秀姑巒"
+    language = lang_group.split("_")[0]
+    g2p = load_g2p_from_csv()
+    text = lower_formosan_text(raw_text, language)
+    ipa, oovs = convert_to_ipa(text, g2p)
