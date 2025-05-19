@@ -1,0 +1,25 @@
+defaults:
+  - _self_
+  - override hydra/hydra_logging: none
+  - override hydra/job_logging: none
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+
+formodata_root: /mnt/md0/FormoData
+
+lexicon_root: lexicon
+vowels_path: metadata/vowels.json
+
+source_datasets:
+  - ${formodata_root}/fb_ilrdf_dict/datasets/asr/train
+  - ${formodata_root}/klokah/datasets/asr/train
+  - ${formodata_root}/klokah/datasets/asr/eval
+  - ${formodata_root}/ithuan_formosan/tts/train
+  - ${formodata_root}/ithuan_formosan/tts/eval
+  - ${formodata_root}/ithuan_amis/asr/train
+  - ${formodata_root}/ithuan_amis/asr/train
+  - ${formodata_root}/formosan_org/datasets/asr/train
+  - ${formodata_root}/formosan_db/datasets/asr/train
